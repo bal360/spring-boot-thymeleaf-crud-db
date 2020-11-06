@@ -18,13 +18,8 @@ import com.blakelong.thymeleafcruddb.service.EmployeeService;
 public class EmployeeController {
 	
 	// inject EmployeeService
-//	@Autowired
-	private EmployeeService employeeService;
-	
 	@Autowired
-	public EmployeeController(EmployeeService employeeService) {
-		this.employeeService = employeeService;
-	}
+	private EmployeeService employeeService;
 	
 	// GET /employees - get all employees
 	@RequestMapping("/employees")
