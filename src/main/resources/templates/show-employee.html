@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>	
+		<title>Employee Show Page</title>
+	</head>
+	<body>
+		<h2>Profile Page</h2>
+		
+		First Name:<p th:text="${employee.firstName}" />
+		Last Name:<p th:text="${employee.lastName}" />
+		Email:<p th:text="${employee.email}" />
+	</body>
+</html>
