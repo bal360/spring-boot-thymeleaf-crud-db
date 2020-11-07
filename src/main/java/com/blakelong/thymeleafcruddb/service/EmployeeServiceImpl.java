@@ -19,7 +19,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	// @Override - findAll()
 	@Override
 	public List<Employee> findAll() {
-		return employeeRepository.findAll();
+		return employeeRepository.findAllByOrderByLastNameAsc();
 	}
 	
 	// @Override - findById(int id)
