@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,17 +60,8 @@ public class EmployeeController {
 		return "employees/employee-form";
 	}
 	
-//	 POST /employees - create an employee
-	@PostMapping("/employees")
-	public String save(@ModelAttribute("employee") Employee employee) {
-		
-		employeeService.save(employee);
-		
-		return "redirect:/employees";
-	}
-	
 	// GET /showFormForUpdate
-	@GetMapping("employees/showFormForUpdate")
+	@GetMapping("/employees/showFormForUpdate")
 	public String showFormForUpdate(@RequestParam("employeeId") int id, Model model) {
 		
 		// get the employee
@@ -82,9 +74,48 @@ public class EmployeeController {
 		return "employees/employee-form";
 	}
 	
+	// POST /employees - create an employee
+	@PostMapping("/employees")
+	public String save(@ModelAttribute("employee") Employee employee) {
+		
+		employeeService.save(employee);
+		
+		return "redirect:/employees";
+	}
+	
+	
 	// PUT /employees - edit an employee
-//	@PutMapping("/employees")
+	//	@PutMapping("/employees")
 	
 	// DELETE /employees/{employeeId} - delete by id
+	@GetMapping("/employees/deleteById")
+	public String deleteById(@RequestParam("employeeId") int id) {
+		
+		System.out.println("Employee =============>>> " + employeeService.findById(id));
+		
+		employeeService.deleteById(id);
+		
+		return "redirect:/employees";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
