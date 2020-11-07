@@ -18,7 +18,7 @@
 			</div>
 			
 			<div class="row justify-content-center">
-				<form action="#" th:action="@{/employees}" method="POST" th:object="${employee}">
+				<form action="#" th:action="@{/employees/new}" method="POST" th:object="${employee}">
 				
 					<input type="hidden" th:field="*{id}" />
 					
@@ -37,7 +37,7 @@
 			</div>
 			
 			<hr>
-			<a th:href="@{/employees}" class="row justify-content-center">Back to Employees Table</a>
+			<a th:href="@{/employees/list-all}" class="row justify-content-center">Back to Employees Table</a>
 			
 		</div>
 	</body>

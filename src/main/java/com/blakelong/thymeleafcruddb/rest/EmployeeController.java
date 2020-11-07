@@ -17,6 +17,7 @@ import com.blakelong.thymeleafcruddb.entity.Employee;
 import com.blakelong.thymeleafcruddb.service.EmployeeService;
 
 @Controller
+@RequestMapping("/employees")
 public class EmployeeController {
 	
 	// inject EmployeeService
@@ -24,7 +25,7 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 	
 	// GET /employees - get all employees
-	@GetMapping("/employees")
+	@GetMapping("/list-all")
 	public String findAll(Model model) {
 		
 		List<Employee> employees = employeeService.findAll();
@@ -35,22 +36,22 @@ public class EmployeeController {
 	}
 	
 	// GET /employees/{employeeId} - get one employee by id
-	@GetMapping("/employees/{employeeId}")
-	public String findById(@PathVariable int employeeId, Model model) {
-		
-		Employee employee = employeeService.findById(employeeId);
-		
-		if (employee == null) {
-			throw new RuntimeException("Employee id not found - " + employeeId);
-		}
-		
-		model.addAttribute("employee", employee);
-		
-		return "employees/show-employee";
-	}
+//	@GetMapping("/employees/{employeeId}")
+//	public String findById(@PathVariable int employeeId, Model model) {
+//		
+//		Employee employee = employeeService.findById(employeeId);
+//		
+//		if (employee == null) {
+//			throw new RuntimeException("Employee id not found - " + employeeId);
+//		}
+//		
+//		model.addAttribute("employee", employee);
+//		
+//		return "employees/show-employee";
+//	}
 	
 	// GET /employees/showFormForAdd
-	@GetMapping("/employees/showFormForAdd")
+	@GetMapping("/showFormForAdd")
 	public String showFormForAdd(Model model) {
 		
 		Employee employee = new Employee();
@@ -60,8 +61,8 @@ public class EmployeeController {
 		return "employees/employee-form";
 	}
 	
-	// GET /showFormForUpdate
-	@GetMapping("/employees/showFormForUpdate")
+	// GET employees/showFormForUpdate
+	@GetMapping("/showFormForUpdate")
 	public String showFormForUpdate(@RequestParam("employeeId") int id, Model model) {
 		
 		// get the employee
@@ -74,28 +75,21 @@ public class EmployeeController {
 		return "employees/employee-form";
 	}
 	
-	// POST /employees - create an employee
-	@PostMapping("/employees")
+	// POST /employees - Create an employee ** AND ** Update an employee
+	@PostMapping("/new")
 	public String save(@ModelAttribute("employee") Employee employee) {
 		
 		employeeService.save(employee);
 		
-		return "redirect:/employees";
+		return "redirect:/employees/list-all";
 	}
 	
-	
-	// PUT /employees - edit an employee
-	//	@PutMapping("/employees")
-	
-	// DELETE /employees/{employeeId} - delete by id
-	@GetMapping("/employees/deleteById")
-	public String deleteById(@RequestParam("employeeId") int id) {
-		
-		System.out.println("Employee =============>>> " + employeeService.findById(id));
+	@GetMapping("/delete")
+	public String delete(@RequestParam("employeeId") int id) {
 		
 		employeeService.deleteById(id);
 		
-		return "redirect:/employees";
+		return "redirect:/employees/list-all";
 	}
 	
 	
